@@ -23,7 +23,7 @@
     <slides id="container">
         <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>Webpack3工程与实践</h1>
-<h2>黄健  商业产品-客增研发</h2>
+<h2>黄健  今日头条-客增研发</h2>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
@@ -451,6 +451,37 @@ Child extract-text-webpack-plugin:
 </div>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>利用happypack做多核编译资源</h2>
+
+</hgroup><article>
+
+<div class="columns1">
+<pre><code class="javascript">
+ const HappyPack = require('happypack');
+ const os = require('os')
+ const HappyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length}); // 启动线程池
+  module:{
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        // use: ['babel-loader?cacheDirectory'],
+        use: 'happypack/loader?id=jsx',
+        exclude: /^node_modules$/
+      }
+    ]
+  },
+  plugins:[
+    new HappyPack({
+     id: 'jsx',
+     threadPool: HappyThreadPool,
+     loaders: ['babel-loader']
+   })
+  ]
+</code></pre>
+</div><h3><a href="https://github.com/amireh/happypack" target="_blank">Happypack</a></h3>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
 <h2>利用dllPlugin做资源预编译</h2>
 
 </hgroup><article>
@@ -515,7 +546,7 @@ Child extract-text-webpack-plugin:
 </div>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><hgroup>
-<h2>code split</h2>
+<h2>代码分割（code spliting）</h2>
 
 </hgroup><article>
 
@@ -678,22 +709,25 @@ css/index.406c9c79a7e451c6d6820e79f0be8503.css   124 kB       5  [emitted]      
 
 </hgroup><article>
 
-<p><div class="columns1"></p>
+<div class="columns1">
 <pre><code class="javascript">
-  const UglifyJsParallelPlugin = require('webpack-uglify-parallel')
-  const os = require('os')
-
-  new UglifyJsParallelPlugin({
-    workers: os.cpus().length,
-    mangle: true,
+  - new webpack.optimize.UglifyJsPlugin()
+  + const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+  new UglifyJsPlugin({
+    uglifyOptions: {
+      ie8: false,
+      ecma: 8,
+      mangle: true,
+      output: { comments: false },
+      compress: { warnings: false }
+    },
     sourceMap: false,
-    compressor: {
-      warnings: false,
-      drop_debugger: true,
-      dead_code: true
-    }
-  }),
+    cache: true,
+    parallel: os.cpus().length * 2
+  })
 </code></pre>
+</div><h3><a href="https://webpack.js.org/plugins/uglifyjs-webpack-plugin/" target="_blank">uglifyjs-webpack-plugin</a></h3>
+
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><hgroup>
 <h2><strong>优化小结</strong></h2>
@@ -703,6 +737,7 @@ css/index.406c9c79a7e451c6d6820e79f0be8503.css   124 kB       5  [emitted]      
 <ul class="rollIn">
 <li>对依赖模块的构成进行充分析</li>
 <li>合理使用externals减少bundle体积</li>
+<li>利用happypack做多核编译资源</li>
 <li>利用dllPlugin做资源预编译</li>
 <li>利用tree-shaking减少无用文件</li>
 <li>对bundle进行code split</li>
