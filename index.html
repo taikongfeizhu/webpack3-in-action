@@ -32,7 +32,7 @@
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>前端工程化</h1>
-<p style='text-align:left;'> 在现代前端开发过程中，随着开发工作的复杂度日趋增加，开发者对自动化化构建的要求越来越高，从传统的软件IDE借鉴思路，将代码的模块管理，引用分析，资源的打包处理，自动输出，压缩合并等进行统一处理，打通研发链路的各环节，提升开发效率</p>
+<p style='text-align:left;'> 在现代前端开发过程中，随着开发工作的复杂度日趋增加，开发者对自动化化构建的要求越来越高，从传统的软件IDE借鉴思路，将代码的模块管理，引用分析，资源的打包处理，自动输出，压缩合并等进行统一处理，打通研发链路的各环节，提升开发效率。</p>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><hgroup>
 <h1>前端自动化构建</h1>
@@ -67,7 +67,7 @@
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>小结：</h1>
 <blockquote>
-<p>主流构建工具层出不穷，但是原理和流程基本相同，所以了解基本的构建思路，对学习和上手工具是非常用用的。</p>
+<p>主流构建工具层出不穷，但是原理和流程基本相同，所以了解基本的构建思路，对学习和上手工具是非常有用的。</p>
 </blockquote>
 
 </article></section></slide>
@@ -102,7 +102,7 @@
     <p>9.支持环境变量，区分开发环境和生产环境</p>
     <p>10.强大方便的 dev-tool 支持，可以定制生成合适的sourcemap进行调试</p>
     <p>11.通过shim特性对各种第三方库进行支持</p>
-    <p>12.社区活跃度高，业内使用广泛，目前三大前端框架都采用webpack做构建</p>
+    <p>12.社区活跃度高，业内使用广泛，目前三大前端主流框架都采用webpack做构建</p>
     <p>13.自定义程度高，可以灵活打造适合自己的工程环境</p>
   </div>
 </article></section></slide>
@@ -130,7 +130,7 @@
 <p><pre><code class="markdown">/<em> Core Concepts  </em>/</p>
 <p>entry: 打包文件的入口点，支持字符串(单文件)，数组(多文件)和对象(多入口)
 chunk：被entry所依赖的额外的代码块，同样可以包含一个或者多个文件，所有的资源都以模块的形式存在
-output: 构建好的资源文件如何写入到指定目录，只能有一个出口 (path，publicPath，filenname)
+output: 指定构建好的资源文件如何写入到指定目录，只能有一个出口 (path，publicPath，filenname)
 loaders: 加载器，用于对特定的源代码和模块进行转换，支持各种语言和预处理器编写模块(jsx=&gt;js, less=&gt;css, img=&gt;base64等)
 plugins: 插件，服务于编译期间，是一个具有apply属性的JavaScript对象，其apply属性会被webpack compiler调用，并且compiler对象可在整个编译生命周期访问
 modules: webpack中放置loaders的地方，可集中在rules数组中进行管理
@@ -144,7 +144,7 @@ manifest：文件清单,当编译器(compiler)开始执行、解析和映射应�
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>webpack-dev-server</h1>
-<p style='text-align:left;'> webpack本身的定位是一个资源管理和打包构建工作，本身的强大之处在于对各种静态资源的依赖分析和预编译，在实际开发中官方还推荐了一个快速读取webpack配置的server环境webpack-dev-server，一个适用于开发环境的，基于express + webpack-dev-middleware实现的，支持实时更新，内存构建资源的开发服务器，通过简单的配置即可满足webpack开发环境中的一系列需求，支持HMR热更新</p>
+<p style='text-align:left;'> webpack本身的定位是一个资源管理和打包构建工作，本身的强大之处在于对各种静态资源的依赖分析和预编译，在实际开发中官方还推荐了一个快速读取webpack配置的server环境<a href="https://webpack.js.org/configuration/dev-server" target="_blank">webpack-dev-server</a>，一个适用于开发环境的，基于express + webpack-dev-middleware实现的，支持实时更新，内存构建资源的开发服务器，通过简单的配置即可满足webpack开发环境中的一系列需求，支持HMR热更新。</p>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><hgroup>
 <h2><code>entry</code> 要点概览</h2>
@@ -157,19 +157,19 @@ manifest：文件清单,当编译器(compiler)开始执行、解析和映射应�
       context: path.resolve(__dirname, './src'), // 指定构建目录
       entry: {
         index: [
-          'react-hot-loader/patch',
           // 开启 React 代码的模块热替换(HMR)
+          'react-hot-loader/patch',
 
-          `webpack-dev-server/client?http://${webpackServerConfig.host}:${webpackServerConfig.port}`,
           // 为 webpack-dev-server 的环境打包代码
           // 然后连接到指定服务器域名与端口
+          `webpack-dev-server/client?http://${webpackServerConfig.host}:${webpackServerConfig.port}`,
 
-          'webpack/hot/only-dev-server',
           // 为热替换(HMR)打包好代码
           // only- 意味着只有成功更新运行代码才会执行热替换(HMR)
+          'webpack/hot/only-dev-server',
 
-          './index.js',
           // app 的入口文件
+          './index.js',
         ],
         vendor: ['react', 'react-dom']
       }
@@ -489,7 +489,7 @@ Child extract-text-webpack-plugin:
 <div class="columns1">
 <pre><code class="javascript">
  plugins:[
-  // 提前编译：NODE_ENV=production webpack --config ./config/webpack.dll.lib.js --progress
+  // 提前编译：NODE_ENV=production webpack --config webpack.dll.lib.js --progress
    new webpack.DllReferencePlugin({
        context: __dirname,
        manifest: require('./public/lib/min/manifest.json')
@@ -521,7 +521,7 @@ Child extract-text-webpack-plugin:
 
 <div class="columns1">
 <pre><code class="javascript">
-  // 通过配置减少没有使用到的多余文件
+  // 通过配置减少没有引用到的方法
   {
     "presets": [
       ["env", {
@@ -577,7 +577,7 @@ Child extract-text-webpack-plugin:
 <h1>代码分割后的效果</h1>
 <pre><code class="shell">
 Version: webpack 3.10.0
-Time: 19081ms
+Time: 201820ms
                                          Asset     Size  Chunks                    Chunk Names
             js/welcome.e3b10688d6ca8ee10e42.js  1.81 kB       0  [emitted]         welcome
              js/List-2.236ac1a8132c52169d80.js  1.44 kB       1  [emitted]         List-2
@@ -762,11 +762,11 @@ css/index.406c9c79a7e451c6d6820e79f0be8503.css   124 kB       5  [emitted]      
   </p>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>感谢聆听！</h1>
+<h1>Q &amp; A</h1>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>Q &amp; A</h1>
+<h1>感谢聆听！</h1>
 
 </article></section></slide>
         
