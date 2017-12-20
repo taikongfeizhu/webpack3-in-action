@@ -22,8 +22,8 @@
 <div class="slides">
     <slides id="container">
         <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>webpack3工程化与实践</h1>
-<h2>黄健  今日头条-客增研发</h2>
+<h1>Webpack3工程化与实践</h1>
+<h2><strong>黄健 今日头条-客增研发</strong></h2>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
@@ -118,7 +118,7 @@
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vleft">
 <h1>Webpack应该怎么学？</h1>
 <blockquote>
-<p>&quot;二八原则&quot;：熟练掌握最核心的API，多查阅，多思考，多总结，不做代码搬运工</p>
+<p>&quot;二八原则&quot;：熟练掌握最核心的API，多查阅，多思考，多总结，不做代码搬运工 !</p>
 </blockquote>
 
 </article></section></slide>
@@ -128,15 +128,15 @@
 </hgroup><article>
 
 <p><pre><code class="markdown">/<em> Core Concepts  </em>/</p>
-<p>entry: 打包文件的入口点，支持字符串(单文件)，数组(多文件)和对象(多入口)
-chunk：被entry所依赖的额外的代码块，同样可以包含一个或者多个文件，所有的资源都以模块的形式存在
-output: 指定构建好的资源文件如何写入到指定目录，只能有一个出口 (path，publicPath，filenname)
-loaders: 加载器，用于对特定的源代码和模块进行转换，支持各种语言和预处理器编写模块(jsx=&gt;js, less=&gt;css, img=&gt;base64等)
-plugins: 插件，服务于编译期间，是一个具有apply属性的JavaScript对象，其apply属性会被webpack compiler调用，并且compiler对象可在整个编译生命周期访问
-modules: webpack中放置loaders的地方，可集中在rules数组中进行管理
-resolve：设置对资源的寻址和解析规则，可通过alias和extensions来进行解析规则定制
-externals：从输出的 bundle 中排除依赖，多在 library 开发或者加载中使用
-manifest：文件清单,当编译器(compiler)开始执行、解析和映射应用程序时，它会保留所有模块的详细要点,使用 manifest 中的数据，runtime 将能够查询模块标识符，检索出背后对应的模块。
+<p><strong>entry:</strong> 就是告诉webpack从哪里开始并通过依赖关系图得知要哪些文件要打包
+<strong>output</strong>: 指定构建好的资源文件如何写入到指定目录，只能有一个出口 (path，publicPath，filenname)
+<strong>loaders</strong>: 加载器，加载器用于将资源代码转换成模块。它允许您在导入或“加载”它们时预处理文件，支持各种语言和预处理器编写模块(jsx=&gt;js, less=&gt;css, img=&gt;base64等)
+<strong>plugins</strong>: 插件，服务于编译期间，是一个具有apply属性的JavaScript对象，其apply属性会被webpack compiler调用，并且compiler对象可在整个编译生命周期访问
+<strong>chunk</strong> ：被entry所依赖的额外的代码块，同样可以包含一个或者多个文件，所有的资源都以模块的形式存在
+<span class='green'>modules</span>: webpack中放置loaders的地方，可集中在rules数组中进行管理
+<span class='green'>resolve</span>：设置对资源的寻址和解析规则，可通过alias和extensions来进行解析规则定制
+<span class='green'>externals</span>：从输出的 bundle 中排除依赖，多在 library 开发或者加载中使用
+<span class='green'>manifest</span>：文件清单,当编译器(compiler)开始执行、解析和映射应用程序时，它会保留所有模块的详细要点,使用 manifest 中的数据，runtime 将能够查询模块标识符，检索出背后对应的模块。
 </code>
 </pre></p>
 <h3><a href="https://webpack.js.org/concepts/" target="_blank">https://webpack.js.org/concepts/</a></h3>
@@ -415,7 +415,7 @@ Child extract-text-webpack-plugin:
 </hgroup><article>
 
 <div class="columns1">
-    <img src="./img/bundle-analyzer.jpg" height="460">
+    <img src="./img/bundle-analyzer.jpg" height="480">
 </div><h3><a href="https://www.npmjs.com/package/webpack-bundle-analyzer" target="_blank">webpack-bundle-analyzer</a></h3>
 
 </article></section></slide>
@@ -742,15 +742,15 @@ css/index.406c9c79a7e451c6d6820e79f0be8503.css   124 kB       5  [emitted]      
 </hgroup><article>
 
 <ul class="rollIn">
-<li>对依赖模块的构成进行充分析</li>
-<li>合理使用externals减少bundle体积</li>
-<li>利用happypack做多核编译资源</li>
-<li>利用dllPlugin做资源预编译</li>
-<li>利用tree-shaking和Scope Hoisting减小文件</li>
-<li>对bundle进行code split</li>
-<li>合理使用dev-tool</li>
-<li>使用HMR提升开发调试效率</li>
-<li>利用CPU多核进行压缩</li>
+<li>1.对依赖模块的构成进行充分析</li>
+<li>2.合理使用externals减少bundle体积</li>
+<li>3.利用happypack做多核编译资源</li>
+<li>4.利用dllPlugin做资源预编译</li>
+<li>5.利用tree-shaking和Scope Hoisting减小文件</li>
+<li>6.对bundle进行code split</li>
+<li>7.合理使用dev-tool</li>
+<li>8.使用HMR提升开发调试效率</li>
+<li>9.利用CPU多核进行压缩</li>
 </ul>
 
 </article></section></slide>
