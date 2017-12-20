@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Webpack3工程化与实践 - By Abcat</title>
+    <title>webpack3工程化与实践 - By Abcat</title>
     <link rel="stylesheet" media="all" href="./css/nodeppt.css">
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
     
@@ -22,8 +22,8 @@
 <div class="slides">
     <slides id="container">
         <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>Webpack3工程化与实践</h1>
-<h2><strong>黄健 今日头条-客增研发</strong></h2>
+<h1>webpack3工程化与实践</h1>
+<h2>黄健  今日头条-客增研发</h2>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
@@ -56,7 +56,7 @@
         <li>模块引入分析(AST)</li>
         <li>模块化规范支持</li>
         <li>CSS编译，自动合并图片</li>
-        <li>HTML,JS,CSS资源压缩优化</li>
+        <li>HTML,JS,CSS资源压缩与优化</li>
         <li>资源路径替换</li>
         <li>开发和生产环境切换</li>
         <li>异步文件打包方案</li>
@@ -236,8 +236,8 @@ manifest：文件清单,当编译器(compiler)开始执行、解析和映射应�
       use: [
         'style-loader',
         'css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]',
-        'less-loader'
-      ]
+        'less-loader',
+      ],
       exclude: /node_modules/
     }
     </code></pre>
@@ -515,13 +515,13 @@ Child extract-text-webpack-plugin:
 </div>
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><hgroup>
-<h2>tree-shaking &amp; babel-import-plugin</h2>
+<h2>Tree-shaking &amp; Scope Hoisting</h2>
 
 </hgroup><article>
 
 <div class="columns1">
 <pre><code class="javascript">
-  // 通过配置减少没有引用到的方法
+  // .babelrc: 通过配置减少没有引用到的方法
   {
     "presets": [
       ["env", {
@@ -532,7 +532,6 @@ Child extract-text-webpack-plugin:
       ["es2015", {"modules": false}]  // tree-shaking
     ],
     "plugins": [
-      ...
       [
         "import",
         {
@@ -540,6 +539,14 @@ Child extract-text-webpack-plugin:
           "libraryName": "antd"  // babel-import-plugin
         }
       ]
+    ]
+  }
+
+  // webpack.config: Scope Hoisting
+  {
+    plugins:[
+      // https://zhuanlan.zhihu.com/p/27980441
+      new webpack.optimize.ModuleConcatenationPlugin()
     ]
   }
 </code></pre>
@@ -739,7 +746,7 @@ css/index.406c9c79a7e451c6d6820e79f0be8503.css   124 kB       5  [emitted]      
 <li>合理使用externals减少bundle体积</li>
 <li>利用happypack做多核编译资源</li>
 <li>利用dllPlugin做资源预编译</li>
-<li>利用tree-shaking减少无用文件</li>
+<li>利用tree-shaking和Scope Hoisting减小文件</li>
 <li>对bundle进行code split</li>
 <li>合理使用dev-tool</li>
 <li>使用HMR提升开发调试效率</li>
@@ -840,15 +847,6 @@ MixJS.loadJS('highlight/highlight.pack.js',function(){
 });
 </script>
 
-
-<!-- MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-  config: ["TeX-AMS-MML_HTMLorMML.js"],
-  tex2jax: {inlineMath: [['\\(','\\)']]}});
-  //['$','$'], 避免货币价格冲突
-</script>
-<script type="text/javascript" src="./js/mathjax/MathJax.js"></script>
 
 <!--placeholder-->
 </body>
